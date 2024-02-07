@@ -1,4 +1,5 @@
 const NEWLINE = /\r?\n/;
+// TODO: Add this between things like set keyword, if keyword, etc.
 const WHITE_SPACE = /[ \t\f\v]/;
 const ANYTHING = /[^\r\n]+/;
 
@@ -20,11 +21,15 @@ function caseInsensitive(values) {
 module.exports = grammar({
   name: 'readline',
 
+  // TODO: Control whitespace explicitly
+  // extras: $ => [],
+
   rules: {
     source: ($) =>
       repeat(
         choice(
-          // $.conditional_construct,
+          $.conditional_construct,
+          seq($.include_directive, NEWLINE),
           seq($.comment, NEWLINE),
           seq($.variable_setting, NEWLINE),
           seq($.key_binding, NEWLINE),
@@ -32,6 +37,77 @@ module.exports = grammar({
       ),
 
     comment: ($) => seq(/#/, optional(ANYTHING)),
+
+    conditional_construct: ($) =>
+      seq(
+        '$if',
+        $.test,
+        NEWLINE,
+        repeat(choice(
+          seq($.include_directive, NEWLINE),
+          seq($.comment, NEWLINE),
+          seq($.variable_setting, NEWLINE),
+          seq($.key_binding, NEWLINE),
+        )),
+        optional(seq(
+          '$else',
+          NEWLINE,
+          repeat(choice(
+            seq($.include_directive, NEWLINE),
+            seq($.comment, NEWLINE),
+            seq($.variable_setting, NEWLINE),
+            seq($.key_binding, NEWLINE),
+          )),
+        )),
+        '$endif',
+        NEWLINE,
+      ),
+
+    test: ($) =>
+      choice(
+        $._mode_test,
+        $._term_test,
+        $._version_test,
+        // $._application_test,
+        $._variable_test,
+      ),
+
+    _mode_test: ($) =>
+      seq(
+        alias(choice(...caseInsensitive(['mode'])), 'mode'),
+        '=',
+        $.edit_mode_value,
+      ),
+
+    _term_test: ($) =>
+      seq(
+        alias(choice(...caseInsensitive(['term'])), 'term'),
+        '=',
+        /\S+/,
+      ),
+
+    _version_test: ($) =>
+      seq(
+        alias(choice(...caseInsensitive(['version'])), 'version'),
+        choice('=', '==', '>=', '<=', '!=', '>', '<'),
+        alias(/[\d\.]+/, $.version_number),
+      ),
+
+    _application_test: ($) => /\S+/,
+
+    _variable_test: ($) =>
+      seq(
+        choice(
+          seq($.bool_variable, choice('=', '==', '!='), $.bool_value),
+          seq($.bell_variable, choice('=', '==', '!='), $.bell_value),
+          seq($.string_variable, choice('=', '==', '!='), $.string_value),
+          seq($.number_variable, choice('=', '==', '!='), $.number_value),
+          seq($.edit_mode_variable, choice('=', '==', '!='), $.edit_mode_value),
+          seq($.keymap_variable, choice('=', '==', '!='), $.keymap_value),
+        ),
+      ),
+
+    include_directive: ($) => seq('$include', alias(ANYTHING, $.file_path)),
 
     variable_setting: ($) =>
       seq(

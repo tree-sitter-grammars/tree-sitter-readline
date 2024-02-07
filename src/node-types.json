@@ -25,6 +25,37 @@
     "fields": {}
   },
   {
+    "type": "conditional_construct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "key_binding",
+          "named": true
+        },
+        {
+          "type": "test",
+          "named": true
+        },
+        {
+          "type": "variable_setting",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "edit_mode_value",
     "named": true,
     "fields": {}
@@ -33,6 +64,21 @@
     "type": "edit_mode_variable",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "include_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "file_path",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "key_binding",
@@ -133,6 +179,14 @@
           "named": true
         },
         {
+          "type": "conditional_construct",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
           "type": "key_binding",
           "named": true
         },
@@ -157,6 +211,69 @@
     "type": "symbolic_character_name",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "test",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bell_value",
+          "named": true
+        },
+        {
+          "type": "bell_variable",
+          "named": true
+        },
+        {
+          "type": "bool_value",
+          "named": true
+        },
+        {
+          "type": "bool_variable",
+          "named": true
+        },
+        {
+          "type": "edit_mode_value",
+          "named": true
+        },
+        {
+          "type": "edit_mode_variable",
+          "named": true
+        },
+        {
+          "type": "keymap_value",
+          "named": true
+        },
+        {
+          "type": "keymap_variable",
+          "named": true
+        },
+        {
+          "type": "number_value",
+          "named": true
+        },
+        {
+          "type": "number_variable",
+          "named": true
+        },
+        {
+          "type": "string_value",
+          "named": true
+        },
+        {
+          "type": "string_variable",
+          "named": true
+        },
+        {
+          "type": "version_number",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "variable_setting",
@@ -218,7 +335,27 @@
     }
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "$else",
+    "named": false
+  },
+  {
+    "type": "$endif",
+    "named": false
+  },
+  {
+    "type": "$if",
+    "named": false
+  },
+  {
+    "type": "$include",
     "named": false
   },
   {
@@ -234,7 +371,35 @@
     "named": false
   },
   {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
     "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "file_path",
     "named": true
   },
   {
@@ -250,11 +415,27 @@
     "named": true
   },
   {
+    "type": "mode",
+    "named": false
+  },
+  {
     "type": "number_value",
     "named": true
   },
   {
     "type": "set",
     "named": false
+  },
+  {
+    "type": "term",
+    "named": false
+  },
+  {
+    "type": "version",
+    "named": false
+  },
+  {
+    "type": "version_number",
+    "named": true
   }
 ]
