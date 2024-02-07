@@ -28,7 +28,7 @@ module.exports = grammar({
 
     _statement: ($) =>
       choice(
-        seq(repeat(WHITE_SPACE), $.conditional_construct),
+        seq(repeat(WHITE_SPACE), $.conditional_construct, NEWLINE),
         seq(repeat(WHITE_SPACE), $.include_directive, NEWLINE),
         seq(repeat(WHITE_SPACE), $.comment, NEWLINE),
         seq(
@@ -52,14 +52,15 @@ module.exports = grammar({
         NEWLINE,
         repeat($._statement),
         optional(seq(
+          repeat(WHITE_SPACE),
           '$else',
           repeat(WHITE_SPACE),
           NEWLINE,
           repeat($._statement),
         )),
+        repeat(WHITE_SPACE),
         '$endif',
         repeat(WHITE_SPACE),
-        NEWLINE,
       ),
 
     test: ($) =>

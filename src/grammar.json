@@ -24,6 +24,10 @@
             {
               "type": "SYMBOL",
               "name": "conditional_construct"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\r?\\n"
             }
           ]
         },
@@ -203,6 +207,13 @@
               "type": "SEQ",
               "members": [
                 {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[ \\t\\f\\v]"
+                  }
+                },
+                {
                   "type": "STRING",
                   "value": "$else"
                 },
@@ -232,6 +243,13 @@
           ]
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[ \\t\\f\\v]"
+          }
+        },
+        {
           "type": "STRING",
           "value": "$endif"
         },
@@ -241,10 +259,6 @@
             "type": "PATTERN",
             "value": "[ \\t\\f\\v]"
           }
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\r?\\n"
         }
       ]
     },
