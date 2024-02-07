@@ -1,6 +1,36 @@
 [
   {
+    "type": "bell_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bell_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bool_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bool_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "edit_mode_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "edit_mode_variable",
     "named": true,
     "fields": {}
   },
@@ -30,6 +60,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "keymap_variable",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "keyname",
@@ -81,6 +116,11 @@
     }
   },
   {
+    "type": "number_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source",
     "named": true,
     "fields": {},
@@ -95,9 +135,23 @@
         {
           "type": "key_binding",
           "named": true
+        },
+        {
+          "type": "variable_setting",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "string_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "string_variable",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "symbolic_character_name",
@@ -105,11 +159,74 @@
     "fields": {}
   },
   {
+    "type": "variable_setting",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bell_value",
+          "named": true
+        },
+        {
+          "type": "bell_variable",
+          "named": true
+        },
+        {
+          "type": "bool_value",
+          "named": true
+        },
+        {
+          "type": "bool_variable",
+          "named": true
+        },
+        {
+          "type": "edit_mode_value",
+          "named": true
+        },
+        {
+          "type": "edit_mode_variable",
+          "named": true
+        },
+        {
+          "type": "keymap_value",
+          "named": true
+        },
+        {
+          "type": "keymap_variable",
+          "named": true
+        },
+        {
+          "type": "number_value",
+          "named": true
+        },
+        {
+          "type": "number_variable",
+          "named": true
+        },
+        {
+          "type": "string_value",
+          "named": true
+        },
+        {
+          "type": "string_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\"",
     "named": false
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "1",
     "named": false
   },
   {
@@ -127,5 +244,17 @@
   {
     "type": "key_literal",
     "named": true
+  },
+  {
+    "type": "keymap_value",
+    "named": true
+  },
+  {
+    "type": "number_value",
+    "named": true
+  },
+  {
+    "type": "set",
+    "named": false
   }
 ]
