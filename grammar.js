@@ -46,10 +46,10 @@ module.exports = grammar({
         ),
       ),
 
-    _bool_assignment: ($) => seq($.bool_variable, $.bool_value),
-    _bell_assignment: ($) => seq($.bell_variable, $.bell_value),
+    _bool_assignment: ($) => seq($.bool_variable, optional($.bool_value)),
+    _bell_assignment: ($) => seq($.bell_variable, optional($.bell_value)),
     _string_assignment: ($) => seq($.string_variable, optional($.string_value)),
-    _number_assignment: ($) => seq($.number_variable, $.number_value),
+    _number_assignment: ($) => seq($.number_variable, optional($.number_value)),
     _edit_mode_assignment: ($) => seq($.edit_mode_variable, $.edit_mode_value),
     _keymap_assignment: ($) => seq($.keymap_variable, $.keymap_value),
 
