@@ -1,6 +1,9 @@
+# vim:ft=readline
 # hello
 
    # hellowagain
 
 coNTRoL-u: a
 coNTRoL-U:a
+
+"\C-m'\"": "asdf"

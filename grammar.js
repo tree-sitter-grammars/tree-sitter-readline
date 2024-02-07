@@ -27,7 +27,7 @@ module.exports = grammar({
           // $.conditional_construct,
           seq($.comment, NEWLINE),
           // $.variable_setting,
-          $.key_binding,
+          seq($.key_binding, NEWLINE),
         ),
       ),
 
@@ -36,9 +36,21 @@ module.exports = grammar({
     key_binding: ($) =>
       seq(choice($.keyname, $.keyseq), ':', choice($.function_name, $.macro)),
 
-    function_name: ($) => 'c',
-    keyseq: ($) => 'b',
-    macro: ($) => 'a',
+    // users can define custom function names
+    function_name: ($) => /[a-zA-Z\-]/,
+
+    keyseq: ($) => $._double_quoted_string,
+
+    macro: ($) => $._quoted_string,
+
+    _double_quoted_string: ($) =>
+      seq('"', repeat1(choice(/[^"\\]/, $.escape_sequence)), '"'),
+
+    _quoted_string: ($) =>
+      seq(/["']/, repeat1(choice(/[^"'\\]/, $.escape_sequence)), /["']/),
+
+    escape_sequence: ($) =>
+      /\\([abdefnrtv'"\\]|x[0-9a-fA-F]{1,2}|[0-7]{1,3}|[CM]-)/,
 
     keyname: ($) =>
       seq(
@@ -63,6 +75,7 @@ module.exports = grammar({
           'Spc',
         ]),
       ),
+
     key_literal: ($) => /\S/,
   },
 });

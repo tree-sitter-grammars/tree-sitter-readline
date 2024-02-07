@@ -51,6 +51,36 @@
     }
   },
   {
+    "type": "keyseq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macro",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source",
     "named": true,
     "fields": {},
@@ -75,6 +105,10 @@
     "fields": {}
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "-",
     "named": false
   },
@@ -83,19 +117,15 @@
     "named": false
   },
   {
+    "type": "escape_sequence",
+    "named": true
+  },
+  {
     "type": "function_name",
     "named": true
   },
   {
     "type": "key_literal",
-    "named": true
-  },
-  {
-    "type": "keyseq",
-    "named": true
-  },
-  {
-    "type": "macro",
     "named": true
   }
 ]
