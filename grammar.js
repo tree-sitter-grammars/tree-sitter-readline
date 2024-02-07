@@ -67,7 +67,7 @@ module.exports = grammar({
         $._mode_test,
         $._term_test,
         $._version_test,
-        // $._application_test,
+        $._application_test,
         $._variable_test,
       ),
 
@@ -97,7 +97,7 @@ module.exports = grammar({
         ),
       ),
 
-    _application_test: ($) => alias(/\S+/, $.application_name),
+    _application_test: ($) => alias(token(prec(-1, /\S+/)), $.application_name),
 
     _variable_test: ($) =>
       seq(

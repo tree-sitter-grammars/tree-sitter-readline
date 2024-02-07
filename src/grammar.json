@@ -414,8 +414,15 @@
     "_application_test": {
       "type": "ALIAS",
       "content": {
-        "type": "PATTERN",
-        "value": "\\S+"
+        "type": "TOKEN",
+        "content": {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "PATTERN",
+            "value": "\\S+"
+          }
+        }
       },
       "named": true,
       "value": "application_name"
