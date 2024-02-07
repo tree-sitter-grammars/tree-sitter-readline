@@ -1,0 +1,201 @@
+{
+  "name": "readline",
+  "rules": {
+    "source": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\r?\\n"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "key_binding"
+          }
+        ]
+      }
+    },
+    "comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "#"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\r\\n]+"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "key_binding": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyname"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyseq"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_name"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "macro"
+            }
+          ]
+        }
+      ]
+    },
+    "function_name": {
+      "type": "STRING",
+      "value": "c"
+    },
+    "keyseq": {
+      "type": "STRING",
+      "value": "b"
+    },
+    "macro": {
+      "type": "STRING",
+      "value": "a"
+    },
+    "keyname": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "symbolic_character_name"
+              },
+              {
+                "type": "STRING",
+                "value": "-"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbolic_character_name"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "key_literal"
+            }
+          ]
+        }
+      ]
+    },
+    "symbolic_character_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[cC][oO][nN][tT][rR][oO][lL]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[mM][eE][tT][aA]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[dD][eE][lL]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[eE][sS][cC]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[eE][sS][cC][aA][pP][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][fF][dD]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[nN][eE][wW][lL][iI][nN][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][tT][uU][rR][nN]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][uU][bB][oO][uU][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][pP][aA][cC][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][pP][cC]"
+        }
+      ]
+    },
+    "key_literal": {
+      "type": "PATTERN",
+      "value": "\\S"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
