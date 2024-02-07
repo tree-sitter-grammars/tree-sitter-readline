@@ -1,5 +1,4 @@
 const NEWLINE = /\r?\n/;
-// TODO: Add this between things like set keyword, if keyword, etc.
 const WHITE_SPACE = /[ \t\f\v]/;
 const ANYTHING = /[^\r\n]+/;
 
@@ -21,19 +20,25 @@ function caseInsensitive(values) {
 module.exports = grammar({
   name: 'readline',
 
-  // TODO: Control whitespace explicitly
-  // extras: $ => [],
+  // Control whitespace explicitly
+  extras: ($) => [],
 
   rules: {
-    source: ($) =>
-      repeat(
-        choice(
-          $.conditional_construct,
-          seq($.include_directive, NEWLINE),
-          seq($.comment, NEWLINE),
-          seq($.variable_setting, NEWLINE),
-          seq($.key_binding, NEWLINE),
+    source: ($) => repeat($._statement),
+
+    _statement: ($) =>
+      choice(
+        seq(repeat(WHITE_SPACE), $.conditional_construct),
+        seq(repeat(WHITE_SPACE), $.include_directive, NEWLINE),
+        seq(repeat(WHITE_SPACE), $.comment, NEWLINE),
+        seq(
+          repeat(WHITE_SPACE),
+          $.variable_setting,
+          repeat(WHITE_SPACE),
+          NEWLINE,
         ),
+        seq(repeat(WHITE_SPACE), $.key_binding, repeat(WHITE_SPACE), NEWLINE),
+        seq(repeat(WHITE_SPACE), NEWLINE),
       ),
 
     comment: ($) => seq(/#/, optional(ANYTHING)),
@@ -41,25 +46,19 @@ module.exports = grammar({
     conditional_construct: ($) =>
       seq(
         '$if',
+        repeat1(WHITE_SPACE),
         $.test,
+        repeat(WHITE_SPACE),
         NEWLINE,
-        repeat(choice(
-          seq($.include_directive, NEWLINE),
-          seq($.comment, NEWLINE),
-          seq($.variable_setting, NEWLINE),
-          seq($.key_binding, NEWLINE),
-        )),
+        repeat($._statement),
         optional(seq(
           '$else',
+          repeat(WHITE_SPACE),
           NEWLINE,
-          repeat(choice(
-            seq($.include_directive, NEWLINE),
-            seq($.comment, NEWLINE),
-            seq($.variable_setting, NEWLINE),
-            seq($.key_binding, NEWLINE),
-          )),
+          repeat($._statement),
         )),
         '$endif',
+        repeat(WHITE_SPACE),
         NEWLINE,
       ),
 
@@ -83,27 +82,68 @@ module.exports = grammar({
       seq(
         alias(choice(...caseInsensitive(['term'])), 'term'),
         '=',
-        /\S+/,
+        alias(/\S+/, $.term_name),
       ),
 
     _version_test: ($) =>
-      seq(
-        alias(choice(...caseInsensitive(['version'])), 'version'),
-        choice('=', '==', '>=', '<=', '!=', '>', '<'),
-        alias(/[\d\.]+/, $.version_number),
+      prec(
+        9,
+        seq(
+          alias(choice(...caseInsensitive(['version'])), 'version'),
+          repeat1(WHITE_SPACE),
+          choice('=', '==', '>=', '<=', '!=', '>', '<'),
+          repeat1(WHITE_SPACE),
+          alias(/[\d\.]+/, $.version_number),
+        ),
       ),
 
-    _application_test: ($) => /\S+/,
+    _application_test: ($) => alias(/\S+/, $.application_name),
 
     _variable_test: ($) =>
       seq(
         choice(
-          seq($.bool_variable, choice('=', '==', '!='), $.bool_value),
-          seq($.bell_variable, choice('=', '==', '!='), $.bell_value),
-          seq($.string_variable, choice('=', '==', '!='), $.string_value),
-          seq($.number_variable, choice('=', '==', '!='), $.number_value),
-          seq($.edit_mode_variable, choice('=', '==', '!='), $.edit_mode_value),
-          seq($.keymap_variable, choice('=', '==', '!='), $.keymap_value),
+          seq(
+            $.bool_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.bool_value,
+          ),
+          seq(
+            $.bell_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.bell_value,
+          ),
+          seq(
+            $.string_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.string_value,
+          ),
+          seq(
+            $.number_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.number_value,
+          ),
+          seq(
+            $.edit_mode_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.edit_mode_value,
+          ),
+          seq(
+            $.keymap_variable,
+            repeat1(WHITE_SPACE),
+            choice('=', '==', '!='),
+            repeat(WHITE_SPACE),
+            $.keymap_value,
+          ),
         ),
       ),
 
@@ -112,6 +152,7 @@ module.exports = grammar({
     variable_setting: ($) =>
       seq(
         'set',
+        repeat1(WHITE_SPACE),
         choice(
           $._bool_assignment,
           $._bell_assignment,
@@ -122,12 +163,34 @@ module.exports = grammar({
         ),
       ),
 
-    _bool_assignment: ($) => seq($.bool_variable, optional($.bool_value)),
-    _bell_assignment: ($) => seq($.bell_variable, optional($.bell_value)),
-    _string_assignment: ($) => seq($.string_variable, optional($.string_value)),
-    _number_assignment: ($) => seq($.number_variable, optional($.number_value)),
-    _edit_mode_assignment: ($) => seq($.edit_mode_variable, $.edit_mode_value),
-    _keymap_assignment: ($) => seq($.keymap_variable, $.keymap_value),
+    _bool_assignment: ($) =>
+      prec.right(
+        seq($.bool_variable, optional(seq(repeat1(WHITE_SPACE), $.bool_value))),
+      ),
+    _bell_assignment: ($) =>
+      prec.right(
+        seq($.bell_variable, optional(seq(repeat1(WHITE_SPACE), $.bell_value))),
+      ),
+    _string_assignment: ($) =>
+      prec.right(
+        seq(
+          $.string_variable,
+          optional(seq(repeat1(WHITE_SPACE), $.string_value)),
+        ),
+      ),
+    _number_assignment: ($) =>
+      prec.right(
+        seq(
+          $.number_variable,
+          optional(seq(repeat1(WHITE_SPACE), $.number_value)),
+        ),
+      ),
+    _edit_mode_assignment: ($) =>
+      prec.right(
+        seq($.edit_mode_variable, repeat1(WHITE_SPACE), $.edit_mode_value),
+      ),
+    _keymap_assignment: ($) =>
+      prec.right(seq($.keymap_variable, repeat1(WHITE_SPACE), $.keymap_value)),
 
     bool_value: ($) => choice('1', ...caseInsensitive(['on', 'off'])),
     bell_value: ($) =>
@@ -196,7 +259,12 @@ module.exports = grammar({
     keymap_variable: ($) => choice(...caseInsensitive(['keymap'])),
 
     key_binding: ($) =>
-      seq(choice($.keyname, $.keyseq), ':', choice($.function_name, $.macro)),
+      seq(
+        choice($.keyname, $.keyseq),
+        ':',
+        repeat(WHITE_SPACE),
+        choice($.function_name, $.macro),
+      ),
 
     // users can define custom function names
     function_name: ($) => /[a-zA-Z\-]/,

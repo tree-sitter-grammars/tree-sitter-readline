@@ -37,6 +37,10 @@
           "named": true
         },
         {
+          "type": "conditional_construct",
+          "named": true
+        },
+        {
           "type": "include_directive",
           "named": true
         },
@@ -218,8 +222,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "application_name",
+          "named": true
+        },
         {
           "type": "bell_value",
           "named": true
@@ -266,6 +274,10 @@
         },
         {
           "type": "string_variable",
+          "named": true
+        },
+        {
+          "type": "term_name",
           "named": true
         },
         {
@@ -395,6 +407,10 @@
     "named": false
   },
   {
+    "type": "application_name",
+    "named": true
+  },
+  {
     "type": "escape_sequence",
     "named": true
   },
@@ -429,6 +445,10 @@
   {
     "type": "term",
     "named": false
+  },
+  {
+    "type": "term_name",
+    "named": true
   },
   {
     "type": "version",
