@@ -151,6 +151,7 @@ module.exports = grammar({
     include_directive: ($) =>
       seq(
         alias(choice(...caseInsensitive(['\\$include'])), '$include'),
+        repeat1(WHITE_SPACE),
         alias(ANYTHING, $.file_path),
       ),
 

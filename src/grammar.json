@@ -773,6 +773,13 @@
           "value": "$include"
         },
         {
+          "type": "REPEAT1",
+          "content": {
+            "type": "PATTERN",
+            "value": "[ \\t\\f\\v]"
+          }
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
