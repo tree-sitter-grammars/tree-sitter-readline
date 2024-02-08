@@ -1295,7 +1295,7 @@
     },
     "function_name": {
       "type": "PATTERN",
-      "value": "[a-zA-Z\\-]"
+      "value": "[a-zA-Z\\-]+"
     },
     "keyseq": {
       "type": "SYMBOL",
