@@ -252,11 +252,6 @@
     }
   },
   {
-    "type": "string_value",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "string_variable",
     "named": true,
     "fields": {}
@@ -491,6 +486,10 @@
   {
     "type": "set",
     "named": false
+  },
+  {
+    "type": "string_value",
+    "named": true
   },
   {
     "type": "term",

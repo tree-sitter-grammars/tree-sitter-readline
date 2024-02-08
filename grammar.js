@@ -1,6 +1,7 @@
 const NEWLINE = /\r?\n/;
 const WHITE_SPACE = /[ \t\f\v]/;
 const ANYTHING = /[^\r\n]+/;
+const ANYTHING_STARTING_NON_WHITESPACE = /\S[^\r\n]*/;
 
 // not necessary in v0.20.9
 function caseInsensitive(values) {
@@ -181,7 +182,10 @@ module.exports = grammar({
       prec.right(
         seq(
           $.string_variable,
-          optional(seq(repeat1(WHITE_SPACE), $.string_value)),
+          choice(
+            repeat(WHITE_SPACE),
+            seq(repeat1(WHITE_SPACE), $.string_value),
+          ),
         ),
       ),
     _number_assignment: ($) =>
@@ -201,7 +205,7 @@ module.exports = grammar({
     bool_value: ($) => choice('1', ...caseInsensitive(['on', 'off'])),
     bell_value: ($) =>
       choice(...caseInsensitive(['none', 'visible', 'audible'])),
-    string_value: ($) => ANYTHING,
+    string_value: ($) => ANYTHING_STARTING_NON_WHITESPACE,
     number_value: ($) => /[-+]?\d+/,
     edit_mode_value: ($) => choice(...caseInsensitive(['emacs', 'vi'])),
     keymap_value: ($) =>

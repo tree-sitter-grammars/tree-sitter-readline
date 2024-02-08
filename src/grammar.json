@@ -933,6 +933,13 @@
             "type": "CHOICE",
             "members": [
               {
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[ \\t\\f\\v]"
+                }
+              },
+              {
                 "type": "SEQ",
                 "members": [
                   {
@@ -947,9 +954,6 @@
                     "name": "string_value"
                   }
                 ]
-              },
-              {
-                "type": "BLANK"
               }
             ]
           }
@@ -1077,7 +1081,7 @@
     },
     "string_value": {
       "type": "PATTERN",
-      "value": "[^\\r\\n]+"
+      "value": "\\S[^\\r\\n]*"
     },
     "number_value": {
       "type": "PATTERN",

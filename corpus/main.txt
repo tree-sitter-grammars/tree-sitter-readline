@@ -228,6 +228,8 @@ coNTRoL-U:               "a"
 $if version   ==      7.0
     set keyseq-timeout 234
 $endif
+set emacs-mode-string   
+# whitespace here    ^^^
 
 --------------------------------------------------------------------------------
 
@@ -248,7 +250,10 @@ $endif
     (consequence
       (variable_setting
         (number_variable)
-        (number_value)))))
+        (number_value))))
+  (variable_setting
+    (string_variable))
+  (comment))
 
 ================================================================================
 a bit of everything
@@ -266,7 +271,7 @@ coNTRoL-U: kill-backward-word
 
 set editing-mode vi         
 set emacs-mode-string
-# NOTE: Whitespace here ^^^^ should work
+
 
 
 "\C-m'\"":"asdf"
@@ -344,7 +349,6 @@ $enDIF
     (edit_mode_value))
   (variable_setting
     (string_variable))
-  (comment)
   (key_binding
     (keyseq
       (escape_sequence)
