@@ -204,11 +204,16 @@
           "value": "\\r?\\n"
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
+          },
+          "named": true,
+          "value": "consequence"
         },
         {
           "type": "CHOICE",
@@ -249,11 +254,16 @@
                   "value": "\\r?\\n"
                 },
                 {
-                  "type": "REPEAT",
+                  "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "_statement"
-                  }
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_statement"
+                    }
+                  },
+                  "named": true,
+                  "value": "alternative"
                 }
               ]
             },

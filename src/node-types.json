@@ -1,5 +1,36 @@
 [
   {
+    "type": "alternative",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional_construct",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "key_binding",
+          "named": true
+        },
+        {
+          "type": "variable_setting",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bell_value",
     "named": true,
     "fields": {}
@@ -33,6 +64,29 @@
       "required": true,
       "types": [
         {
+          "type": "alternative",
+          "named": true
+        },
+        {
+          "type": "consequence",
+          "named": true
+        },
+        {
+          "type": "test",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "consequence",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
           "type": "comment",
           "named": true
         },
@@ -46,10 +100,6 @@
         },
         {
           "type": "key_binding",
-          "named": true
-        },
-        {
-          "type": "test",
           "named": true
         },
         {

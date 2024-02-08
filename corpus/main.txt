@@ -102,11 +102,13 @@ $endif
   (conditional_construct
     (test
       (version_number))
-    (include_directive
-      (file_path))
-    (variable_setting
-      (edit_mode_variable)
-      (edit_mode_value))))
+    (consequence
+      (include_directive
+        (file_path)))
+    (alternative
+      (variable_setting
+        (edit_mode_variable)
+        (edit_mode_value)))))
 
 ================================================================================
 keyseq with lots of escape sequences
@@ -198,18 +200,22 @@ $endif
   (conditional_construct
     (test
       (term_name))
-    (conditional_construct
-      (test
-        (application_name))
+    (consequence
+      (conditional_construct
+        (test
+          (application_name))
+        (consequence
+          (variable_setting
+            (number_variable)
+            (number_value)))
+        (alternative
+          (variable_setting
+            (number_variable)
+            (number_value)))))
+    (alternative
       (variable_setting
         (number_variable)
-        (number_value))
-      (variable_setting
-        (number_variable)
-        (number_value)))
-    (variable_setting
-      (number_variable)
-      (number_value))))
+        (number_value)))))
 
 ================================================================================
 weird whitespace
@@ -239,9 +245,10 @@ $endif
   (conditional_construct
     (test
       (version_number))
-    (variable_setting
-      (number_variable)
-      (number_value))))
+    (consequence
+      (variable_setting
+        (number_variable)
+        (number_value)))))
 
 ================================================================================
 a bit of everything
@@ -349,30 +356,35 @@ $enDIF
   (conditional_construct
     (test
       (version_number))
-    (comment)
-    (include_directive
-      (file_path))
-    (variable_setting
-      (edit_mode_variable)
-      (edit_mode_value))
-    (comment))
+    (consequence
+      (comment)
+      (include_directive
+        (file_path)))
+    (alternative
+      (variable_setting
+        (edit_mode_variable)
+        (edit_mode_value))
+      (comment)))
   (comment)
   (comment)
   (comment)
   (conditional_construct
     (test
       (application_name))
-    (include_directive
-      (file_path))
-    (variable_setting
-      (edit_mode_variable)
-      (edit_mode_value)))
+    (consequence
+      (include_directive
+        (file_path)))
+    (alternative
+      (variable_setting
+        (edit_mode_variable)
+        (edit_mode_value))))
   (conditional_construct
     (test
       (version_number))
-    (variable_setting
-      (number_variable)
-      (number_value)))
+    (consequence
+      (variable_setting
+        (number_variable)
+        (number_value))))
   (comment)
   (comment)
   (variable_setting
@@ -381,28 +393,34 @@ $enDIF
   (conditional_construct
     (test
       (term_name))
-    (variable_setting
-      (edit_mode_variable)
-      (edit_mode_value)))
+    (consequence
+      (variable_setting
+        (edit_mode_variable)
+        (edit_mode_value))))
   (conditional_construct
     (test
       (edit_mode_variable)
       (edit_mode_value))
-    (variable_setting
-      (bool_variable)
-      (bool_value)))
+    (consequence
+      (variable_setting
+        (bool_variable)
+        (bool_value))))
   (conditional_construct
     (test
       (term_name))
-    (conditional_construct
-      (test
-        (application_name))
+    (consequence
+      (conditional_construct
+        (test
+          (application_name))
+        (consequence
+          (variable_setting
+            (number_variable)
+            (number_value)))
+        (alternative
+          (variable_setting
+            (number_variable)
+            (number_value)))))
+    (alternative
       (variable_setting
         (number_variable)
-        (number_value))
-      (variable_setting
-        (number_variable)
-        (number_value)))
-    (variable_setting
-      (number_variable)
-      (number_value))))
+        (number_value)))))
