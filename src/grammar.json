@@ -168,7 +168,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\$[iI][fF]"
+              }
+            ]
+          },
+          "named": false,
           "value": "$if"
         },
         {
@@ -214,7 +224,17 @@
                   }
                 },
                 {
-                  "type": "STRING",
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "PATTERN",
+                        "value": "\\$[eE][lL][sS][eE]"
+                      }
+                    ]
+                  },
+                  "named": false,
                   "value": "$else"
                 },
                 {
@@ -250,7 +270,17 @@
           }
         },
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\$[eE][nN][dD][iI][fF]"
+              }
+            ]
+          },
+          "named": false,
           "value": "$endif"
         },
         {
@@ -719,7 +749,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\$[iI][nN][cC][lL][uU][dD][eE]"
+              }
+            ]
+          },
+          "named": false,
           "value": "$include"
         },
         {
@@ -737,7 +777,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[sS][eE][tT]"
+              }
+            ]
+          },
+          "named": false,
           "value": "set"
         },
         {

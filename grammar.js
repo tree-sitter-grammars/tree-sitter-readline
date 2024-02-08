@@ -45,7 +45,7 @@ module.exports = grammar({
 
     conditional_construct: ($) =>
       seq(
-        '$if',
+        alias(choice(...caseInsensitive(['\\$if'])), '$if'),
         repeat1(WHITE_SPACE),
         $.test,
         repeat(WHITE_SPACE),
@@ -53,13 +53,13 @@ module.exports = grammar({
         repeat($._statement),
         optional(seq(
           repeat(WHITE_SPACE),
-          '$else',
+          alias(choice(...caseInsensitive(['\\$else'])), '$else'),
           repeat(WHITE_SPACE),
           NEWLINE,
           repeat($._statement),
         )),
         repeat(WHITE_SPACE),
-        '$endif',
+        alias(choice(...caseInsensitive(['\\$endif'])), '$endif'),
         repeat(WHITE_SPACE),
       ),
 
@@ -148,11 +148,15 @@ module.exports = grammar({
         ),
       ),
 
-    include_directive: ($) => seq('$include', alias(ANYTHING, $.file_path)),
+    include_directive: ($) =>
+      seq(
+        alias(choice(...caseInsensitive(['\\$include'])), '$include'),
+        alias(ANYTHING, $.file_path),
+      ),
 
     variable_setting: ($) =>
       seq(
-        'set',
+        alias(choice(...caseInsensitive(['set'])), 'set'),
         repeat1(WHITE_SPACE),
         choice(
           $._bool_assignment,

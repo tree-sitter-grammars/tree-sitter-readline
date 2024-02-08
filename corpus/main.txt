@@ -133,12 +133,12 @@ comments and case-insensitivity
 ================================================================================
 
 # start in vi mode
-set editing-mode VI
+seT editing-mode VI
 set SHOW-MODE-IN-PROMPT on
 # case insensitive auto-complete
 set completion-ignore-case oN
 # don't show weird emacs mode string
-set emacs-mode-string
+SET emacs-mode-string
 # blinking I-beam cursor in insert mode
 set VI-ins-mode-string \1\e[5 q\2
 # block cursor in normal mode
@@ -278,7 +278,7 @@ $endif
 #comment
 
 $if Bash
-    $include hello
+    $INCLUDE hello
 $else
     set editing-mode emacs
 $endif
@@ -303,15 +303,15 @@ set show-mode-in-prompt on
 $endif
 
 
-$if term=kitty
+$If term=kitty
     $if Bash
         set keyseq-timeout 69
     $else
         set keyseq-timeout 129
     $endif
-$else
+$ELSE
     set KEYSEQ-TIMEOUT 56
-$endif
+$enDIF
 
 
 --------------------------------------------------------------------------------
