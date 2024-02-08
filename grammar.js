@@ -268,7 +268,7 @@ module.exports = grammar({
       ),
 
     // users can define custom function names
-    function_name: ($) => /[a-zA-Z\-]/,
+    function_name: ($) => /[a-zA-Z\-]+/,
 
     keyseq: ($) => $._double_quoted_string,
 
