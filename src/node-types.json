@@ -125,7 +125,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "file_path",
@@ -250,6 +250,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "string_value",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string_variable",
@@ -486,10 +491,6 @@
   {
     "type": "set",
     "named": false
-  },
-  {
-    "type": "string_value",
-    "named": true
   },
   {
     "type": "term",

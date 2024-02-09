@@ -230,6 +230,14 @@ $if version   ==      7.0
 $endif
 set emacs-mode-string   
 # whitespace here    ^^^
+set keyseq-timeout             
+set editing-mode      
+set keymap      
+$include
+set show-mode-in-prompt        
+set editing-mode      emacs
+$include       
+set editing-mode vi  
 
 --------------------------------------------------------------------------------
 
@@ -253,7 +261,23 @@ set emacs-mode-string
         (number_value))))
   (variable_setting
     (string_variable))
-  (comment))
+  (comment)
+  (variable_setting
+    (number_variable))
+  (variable_setting
+    (edit_mode_variable))
+  (variable_setting
+    (keymap_variable))
+  (include_directive)
+  (variable_setting
+    (bool_variable))
+  (variable_setting
+    (edit_mode_variable)
+    (edit_mode_value))
+  (include_directive)
+  (variable_setting
+    (edit_mode_variable)
+    (edit_mode_value)))
 
 ================================================================================
 a bit of everything

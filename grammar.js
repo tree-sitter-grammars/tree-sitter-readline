@@ -152,8 +152,13 @@ module.exports = grammar({
     include_directive: ($) =>
       seq(
         alias(choice(...caseInsensitive(['\\$include'])), '$include'),
-        repeat1(WHITE_SPACE),
-        alias(ANYTHING, $.file_path),
+        choice(
+          repeat(WHITE_SPACE),
+          seq(
+            repeat1(WHITE_SPACE),
+            alias(ANYTHING_STARTING_NON_WHITESPACE, $.file_path),
+          ),
+        ),
       ),
 
     variable_setting: ($) =>
@@ -172,11 +177,17 @@ module.exports = grammar({
 
     _bool_assignment: ($) =>
       prec.right(
-        seq($.bool_variable, optional(seq(repeat1(WHITE_SPACE), $.bool_value))),
+        seq(
+          $.bool_variable,
+          choice(repeat(WHITE_SPACE), seq(repeat1(WHITE_SPACE), $.bool_value)),
+        ),
       ),
     _bell_assignment: ($) =>
       prec.right(
-        seq($.bell_variable, optional(seq(repeat1(WHITE_SPACE), $.bell_value))),
+        seq(
+          $.bell_variable,
+          choice(repeat(WHITE_SPACE), seq(repeat1(WHITE_SPACE), $.bell_value)),
+        ),
       ),
     _string_assignment: ($) =>
       prec.right(
@@ -192,15 +203,32 @@ module.exports = grammar({
       prec.right(
         seq(
           $.number_variable,
-          optional(seq(repeat1(WHITE_SPACE), $.number_value)),
+          choice(
+            repeat(WHITE_SPACE),
+            seq(repeat1(WHITE_SPACE), $.number_value),
+          ),
         ),
       ),
     _edit_mode_assignment: ($) =>
       prec.right(
-        seq($.edit_mode_variable, repeat1(WHITE_SPACE), $.edit_mode_value),
+        seq(
+          $.edit_mode_variable,
+          choice(
+            repeat(WHITE_SPACE),
+            seq(repeat1(WHITE_SPACE), $.edit_mode_value),
+          ),
+        ),
       ),
     _keymap_assignment: ($) =>
-      prec.right(seq($.keymap_variable, repeat1(WHITE_SPACE), $.keymap_value)),
+      prec.right(
+        seq(
+          $.keymap_variable,
+          choice(
+            repeat(WHITE_SPACE),
+            seq(repeat1(WHITE_SPACE), $.keymap_value),
+          ),
+        ),
+      ),
 
     bool_value: ($) => choice('1', ...caseInsensitive(['on', 'off'])),
     bell_value: ($) =>
