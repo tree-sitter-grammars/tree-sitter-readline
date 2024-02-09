@@ -95,7 +95,7 @@ module.exports = grammar({
           repeat1(WHITE_SPACE),
           choice('=', '==', '>=', '<=', '!=', '>', '<'),
           repeat1(WHITE_SPACE),
-          alias(/[\d\.]+/, $.version_number),
+          alias(/\d+\.?\d*/, $.version_number),
         ),
       ),
 

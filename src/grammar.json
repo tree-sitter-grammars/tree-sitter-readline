@@ -457,7 +457,7 @@
             "type": "ALIAS",
             "content": {
               "type": "PATTERN",
-              "value": "[\\d\\.]+"
+              "value": "\\d+\\.?\\d*"
             },
             "named": true,
             "value": "version_number"
