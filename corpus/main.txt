@@ -338,6 +338,7 @@ $if editing-mode == emacs
 set show-mode-in-prompt on
 $endif
 
+set bell-style VIsibLE
 
 $If term=kitty
     $if Bash
@@ -348,7 +349,6 @@ $If term=kitty
 $ELSE
     set KEYSEQ-TIMEOUT 56
 $enDIF
-
 
 --------------------------------------------------------------------------------
 
@@ -433,6 +433,9 @@ $enDIF
       (variable_setting
         (bool_variable)
         (bool_value))))
+  (variable_setting
+    (bell_variable)
+    (bell_value))
   (conditional_construct
     (test
       (term_name))

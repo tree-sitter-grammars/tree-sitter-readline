@@ -170,13 +170,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\$[iI][fF]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "\\$if",
+            "flags": "i"
           },
           "named": false,
           "value": "$if"
@@ -231,13 +227,9 @@
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "PATTERN",
-                        "value": "\\$[eE][lL][sS][eE]"
-                      }
-                    ]
+                    "type": "PATTERN",
+                    "value": "\\$else",
+                    "flags": "i"
                   },
                   "named": false,
                   "value": "$else"
@@ -282,13 +274,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\$[eE][nN][dD][iI][fF]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "\\$endif",
+            "flags": "i"
           },
           "named": false,
           "value": "$endif"
@@ -333,13 +321,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[mM][oO][dD][eE]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "mode",
+            "flags": "i"
           },
           "named": false,
           "value": "mode"
@@ -360,13 +344,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[tT][eE][rR][mM]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "term",
+            "flags": "i"
           },
           "named": false,
           "value": "term"
@@ -395,13 +375,9 @@
           {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[vV][eE][rR][sS][iI][oO][nN]"
-                }
-              ]
+              "type": "PATTERN",
+              "value": "version",
+              "flags": "i"
             },
             "named": false,
             "value": "version"
@@ -761,13 +737,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\$[iI][nN][cC][lL][uU][dD][eE]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "\\$include",
+            "flags": "i"
           },
           "named": false,
           "value": "$include"
@@ -813,13 +785,9 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[sS][eE][tT]"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "set",
+            "flags": "i"
           },
           "named": false,
           "value": "set"
@@ -1117,11 +1085,13 @@
         },
         {
           "type": "PATTERN",
-          "value": "[oO][nN]"
+          "value": "on",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[oO][fF][fF]"
+          "value": "off",
+          "flags": "i"
         }
       ]
     },
@@ -1130,15 +1100,18 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[nN][oO][nN][eE]"
+          "value": "none",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[vV][iI][sS][iI][bB][lL][eE]"
+          "value": "visible",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[aA][uU][dD][iI][bB][lL][eE]"
+          "value": "audible",
+          "flags": "i"
         }
       ]
     },
@@ -1155,190 +1128,228 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[eE][mM][aA][cC][sS]"
+          "value": "emacs",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[vV][iI]"
+          "value": "vi",
+          "flags": "i"
         }
       ]
     },
     "keymap_value": {
       "type": "PATTERN",
-      "value": "(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)"
+      "value": "(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)",
+      "flags": "i"
     },
     "bool_variable": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PATTERN",
-          "value": "[bB][iI][nN][dD]-[tT][tT][yY]-[sS][pP][eE][cC][iI][aA][lL]-[cC][hH][aA][rR][sS]"
+          "value": "bind-tty-special-chars",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[bB][lL][iI][nN][kK]-[mM][aA][tT][cC][hH][iI][nN][gG]-[pP][aA][rR][eE][nN]"
+          "value": "blink-matching-paren",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][lL][oO][rR][eE][dD]-[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[pP][rR][eE][fF][iI][xX]"
+          "value": "colored-completion-prefix",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][lL][oO][rR][eE][dD]-[sS][tT][aA][tT][sS]"
+          "value": "colored-stats",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[iI][gG][nN][oO][rR][eE]-[cC][aA][sS][eE]"
+          "value": "completion-ignore-case",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[mM][aA][pP]-[cC][aA][sS][eE]"
+          "value": "completion-map-case",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][nN][vV][eE][rR][tT]-[mM][eE][tT][aA]"
+          "value": "convert-meta",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[dD][iI][sS][aA][bB][lL][eE]-[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]"
+          "value": "disable-completion",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][cC][hH][oO]-[cC][oO][nN][tT][rR][oO][lL]-[cC][hH][aA][rR][aA][cC][tT][eE][rR][sS]"
+          "value": "echo-control-characters",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][nN][aA][bB][lL][eE]-[aA][cC][tT][iI][vV][eE]-[rR][eE][gG][iI][oO][nN]"
+          "value": "enable-active-region",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][nN][aA][bB][lL][eE]-[bB][rR][aA][cC][kK][eE][tT][eE][dD]-[pP][aA][sS][tT][eE]"
+          "value": "enable-bracketed-paste",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][nN][aA][bB][lL][eE]-[kK][eE][yY][pP][aA][dD]"
+          "value": "enable-keypad",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][nN][aA][bB][lL][eE]-[mM][eE][tT][aA]-[kK][eE][yY]"
+          "value": "enable-meta-key",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][xX][pP][aA][nN][dD]-[tT][iI][lL][dD][eE]"
+          "value": "expand-tilde",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[hH][iI][sS][tT][oO][rR][yY]-[pP][rR][eE][sS][eE][rR][vV][eE]-[pP][oO][iI][nN][tT]"
+          "value": "history-preserve-point",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[hH][oO][rR][iI][zZ][oO][nN][tT][aA][lL]-[sS][cC][rR][oO][lL][lL]-[mM][oO][dD][eE]"
+          "value": "horizontal-scroll-mode",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[iI][nN][pP][uU][tT]-[mM][eE][tT][aA]"
+          "value": "input-meta",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][aA][rR][kK]-[dD][iI][rR][eE][cC][tT][oO][rR][iI][eE][sS]"
+          "value": "mark-directories",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][aA][rR][kK]-[mM][oO][dD][iI][fF][iI][eE][dD]-[lL][iI][nN][eE][sS]"
+          "value": "mark-modified-lines",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][aA][rR][kK]-[sS][yY][mM][lL][iI][nN][kK][eE][dD]-[dD][iI][rR][eE][cC][tT][oO][rR][iI][eE][sS]"
+          "value": "mark-symlinked-directories",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][aA][tT][cC][hH]-[hH][iI][dD][dD][eE][nN]-[fF][iI][lL][eE][sS]"
+          "value": "match-hidden-files",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][eE][nN][uU]-[cC][oO][mM][pP][lL][eE][tT][eE]-[dD][iI][sS][pP][lL][aA][yY]-[pP][rR][eE][fF][iI][xX]"
+          "value": "menu-complete-display-prefix",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][eE][tT][aA]-[fF][lL][aA][gG]"
+          "value": "meta-flag",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[oO][uU][tT][pP][uU][tT]-[mM][eE][tT][aA]"
+          "value": "output-meta",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[pP][aA][gG][eE]-[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN][sS]"
+          "value": "page-completions",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[pP][rR][iI][nN][tT]-[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN][sS]-[hH][oO][rR][iI][zZ][oO][nN][tT][aA][lL][lL][yY]"
+          "value": "print-completions-horizontally",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[rR][eE][vV][eE][rR][tT]-[aA][lL][lL]-[aA][tT]-[nN][eE][wW][lL][iI][nN][eE]"
+          "value": "revert-all-at-newline",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][hH][oO][wW]-[aA][lL][lL]-[iI][fF]-[aA][mM][bB][iI][gG][uU][oO][uU][sS]"
+          "value": "show-all-if-ambiguous",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][hH][oO][wW]-[aA][lL][lL]-[iI][fF]-[uU][nN][mM][oO][dD][iI][fF][iI][eE][dD]"
+          "value": "show-all-if-unmodified",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][hH][oO][wW]-[mM][oO][dD][eE]-[iI][nN]-[pP][rR][oO][mM][pP][tT]"
+          "value": "show-mode-in-prompt",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][kK][iI][pP]-[cC][oO][mM][pP][lL][eE][tT][eE][dD]-[tT][eE][xX][tT]"
+          "value": "skip-completed-text",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[vV][iI][sS][iI][bB][lL][eE]-[sS][tT][aA][tT][sS]"
+          "value": "visible-stats",
+          "flags": "i"
         }
       ]
     },
     "bell_variable": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[bB][eE][lL][lL]-[sS][tT][yY][lL][eE]"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "bell\\-style",
+      "flags": "i"
     },
     "string_variable": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PATTERN",
-          "value": "[aA][cC][tT][iI][vV][eE]-[rR][eE][gG][iI][oO][nN]-[eE][nN][dD]-[cC][oO][lL][oO][rR]"
+          "value": "active-region-end-color",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[aA][cC][tT][iI][vV][eE]-[rR][eE][gG][iI][oO][nN]-[sS][tT][aA][rR][tT]-[cC][oO][lL][oO][rR]"
+          "value": "active-region-start-color",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][mM][eE][nN][tT]-[bB][eE][gG][iI][nN]"
+          "value": "comment-begin",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][mM][aA][cC][sS]-[mM][oO][dD][eE]-[sS][tT][rR][iI][nN][gG]"
+          "value": "emacs-mode-string",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[iI][sS][eE][aA][rR][cC][hH]-[tT][eE][rR][mM][iI][nN][aA][tT][oO][rR][sS]"
+          "value": "isearch-terminators",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[vV][iI]-[cC][mM][dD]-[mM][oO][dD][eE]-[sS][tT][rR][iI][nN][gG]"
+          "value": "vi-cmd-mode-string",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[vV][iI]-[iI][nN][sS]-[mM][oO][dD][eE]-[sS][tT][rR][iI][nN][gG]"
+          "value": "vi-ins-mode-string",
+          "flags": "i"
         }
       ]
     },
@@ -1347,43 +1358,40 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[dD][iI][sS][pP][lL][aA][yY]-[wW][iI][dD][tT][hH]"
+          "value": "completion-display-width",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[pP][rR][eE][fF][iI][xX]-[dD][iI][sS][pP][lL][aA][yY]-[lL][eE][nN][gG][tT][hH]"
+          "value": "completion-prefix-display-length",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[cC][oO][mM][pP][lL][eE][tT][iI][oO][nN]-[qQ][uU][eE][rR][yY]-[iI][tT][eE][mM][sS]"
+          "value": "completion-query-items",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[hH][iI][sS][tT][oO][rR][yY]-[sS][iI][zZ][eE]"
+          "value": "history-size",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[kK][eE][yY][sS][eE][qQ]-[tT][iI][mM][eE][oO][uU][tT]"
+          "value": "keyseq-timeout",
+          "flags": "i"
         }
       ]
     },
     "edit_mode_variable": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[eE][dD][iI][tT][iI][nN][gG]-[mM][oO][dD][eE]"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "editing\\-mode",
+      "flags": "i"
     },
     "keymap_variable": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[kK][eE][yY][mM][aA][pP]"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "keymap",
+      "flags": "i"
     },
     "key_binding": {
       "type": "SEQ",
@@ -1540,51 +1548,63 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[cC][oO][nN][tT][rR][oO][lL]"
+          "value": "Control",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[mM][eE][tT][aA]"
+          "value": "Meta",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[dD][eE][lL]"
+          "value": "Del",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][sS][cC]"
+          "value": "Esc",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[eE][sS][cC][aA][pP][eE]"
+          "value": "Escape",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[lL][fF][dD]"
+          "value": "LFD",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[nN][eE][wW][lL][iI][nN][eE]"
+          "value": "Newline",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[rR][eE][tT]"
+          "value": "Ret",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[rR][eE][tT][uU][rR][nN]"
+          "value": "Return",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[rR][uU][bB][oO][uU][tT]"
+          "value": "Rubout",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][pP][aA][cC][eE]"
+          "value": "Space",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "[sS][pP][cC]"
+          "value": "Spc",
+          "flags": "i"
         }
       ]
     },

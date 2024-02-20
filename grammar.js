@@ -3,21 +3,6 @@ const WHITE_SPACE = /[ \t\f\v]/;
 const ANYTHING = /[^\r\n]+/;
 const ANYTHING_STARTING_NON_WHITESPACE = /\S[^\r\n]*/;
 
-// not necessary in v0.20.9
-function caseInsensitive(values) {
-  return values.map((value) => {
-    let out = '';
-    for (const c of value) {
-      if (c.match(/[a-zA-Z]/)) {
-        out += `[${c.toLowerCase()}${c.toUpperCase()}]`;
-      } else {
-        out += c;
-      }
-    }
-    return new RegExp(out);
-  });
-}
-
 module.exports = grammar({
   name: 'readline',
 
@@ -46,7 +31,7 @@ module.exports = grammar({
 
     conditional_construct: ($) =>
       seq(
-        alias(choice(...caseInsensitive(['\\$if'])), '$if'),
+        alias(/\$if/i, '$if'),
         repeat1(WHITE_SPACE),
         $.test,
         repeat(WHITE_SPACE),
@@ -54,13 +39,13 @@ module.exports = grammar({
         alias(repeat($._statement), $.consequence),
         optional(seq(
           repeat(WHITE_SPACE),
-          alias(choice(...caseInsensitive(['\\$else'])), '$else'),
+          alias(/\$else/i, '$else'),
           repeat(WHITE_SPACE),
           NEWLINE,
           alias(repeat($._statement), $.alternative),
         )),
         repeat(WHITE_SPACE),
-        alias(choice(...caseInsensitive(['\\$endif'])), '$endif'),
+        alias(/\$endif/i, '$endif'),
         repeat(WHITE_SPACE),
       ),
 
@@ -75,14 +60,14 @@ module.exports = grammar({
 
     _mode_test: ($) =>
       seq(
-        alias(choice(...caseInsensitive(['mode'])), 'mode'),
+        alias(/mode/i, 'mode'),
         '=',
         $.edit_mode_value,
       ),
 
     _term_test: ($) =>
       seq(
-        alias(choice(...caseInsensitive(['term'])), 'term'),
+        alias(/term/i, 'term'),
         '=',
         alias(/\S+/, $.term_name),
       ),
@@ -91,7 +76,7 @@ module.exports = grammar({
       prec(
         9,
         seq(
-          alias(choice(...caseInsensitive(['version'])), 'version'),
+          alias(/version/i, 'version'),
           repeat1(WHITE_SPACE),
           choice('=', '==', '>=', '<=', '!=', '>', '<'),
           repeat1(WHITE_SPACE),
@@ -151,7 +136,7 @@ module.exports = grammar({
 
     include_directive: ($) =>
       seq(
-        alias(choice(...caseInsensitive(['\\$include'])), '$include'),
+        alias(/\$include/i, '$include'),
         choice(
           repeat(WHITE_SPACE),
           seq(
@@ -163,7 +148,7 @@ module.exports = grammar({
 
     variable_setting: ($) =>
       seq(
-        alias(choice(...caseInsensitive(['set'])), 'set'),
+        alias(/set/i, 'set'),
         repeat1(WHITE_SPACE),
         choice(
           $._bool_assignment,
@@ -230,71 +215,70 @@ module.exports = grammar({
         ),
       ),
 
-    bool_value: ($) => choice('1', ...caseInsensitive(['on', 'off'])),
-    bell_value: ($) =>
-      choice(...caseInsensitive(['none', 'visible', 'audible'])),
+    bool_value: ($) => choice('1', /on/i, /off/i),
+    bell_value: ($) => choice(/none/i, /visible/i, /audible/i),
     string_value: ($) => ANYTHING_STARTING_NON_WHITESPACE,
     number_value: ($) => /[-+]?\d+/,
-    edit_mode_value: ($) => choice(...caseInsensitive(['emacs', 'vi'])),
+    edit_mode_value: ($) => choice(/emacs/i, /vi/i),
     keymap_value: ($) =>
-      /(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)/,
+      /(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)/i,
 
     bool_variable: ($) =>
-      choice(...caseInsensitive([
-        'bind-tty-special-chars',
-        'blink-matching-paren',
-        'colored-completion-prefix',
-        'colored-stats',
-        'completion-ignore-case',
-        'completion-map-case',
-        'convert-meta',
-        'disable-completion',
-        'echo-control-characters',
-        'enable-active-region',
-        'enable-bracketed-paste',
-        'enable-keypad',
-        'enable-meta-key',
-        'expand-tilde',
-        'history-preserve-point',
-        'horizontal-scroll-mode',
-        'input-meta',
-        'mark-directories',
-        'mark-modified-lines',
-        'mark-symlinked-directories',
-        'match-hidden-files',
-        'menu-complete-display-prefix',
-        'meta-flag',
-        'output-meta',
-        'page-completions',
-        'print-completions-horizontally',
-        'revert-all-at-newline',
-        'show-all-if-ambiguous',
-        'show-all-if-unmodified',
-        'show-mode-in-prompt',
-        'skip-completed-text',
-        'visible-stats',
-      ])),
-    bell_variable: ($) => choice(...caseInsensitive(['bell-style'])),
+      choice(
+        /bind-tty-special-chars/i,
+        /blink-matching-paren/i,
+        /colored-completion-prefix/i,
+        /colored-stats/i,
+        /completion-ignore-case/i,
+        /completion-map-case/i,
+        /convert-meta/i,
+        /disable-completion/i,
+        /echo-control-characters/i,
+        /enable-active-region/i,
+        /enable-bracketed-paste/i,
+        /enable-keypad/i,
+        /enable-meta-key/i,
+        /expand-tilde/i,
+        /history-preserve-point/i,
+        /horizontal-scroll-mode/i,
+        /input-meta/i,
+        /mark-directories/i,
+        /mark-modified-lines/i,
+        /mark-symlinked-directories/i,
+        /match-hidden-files/i,
+        /menu-complete-display-prefix/i,
+        /meta-flag/i,
+        /output-meta/i,
+        /page-completions/i,
+        /print-completions-horizontally/i,
+        /revert-all-at-newline/i,
+        /show-all-if-ambiguous/i,
+        /show-all-if-unmodified/i,
+        /show-mode-in-prompt/i,
+        /skip-completed-text/i,
+        /visible-stats/i,
+      ),
+    bell_variable: ($) => /bell\-style/i,
     string_variable: ($) =>
-      choice(...caseInsensitive([
-        'active-region-end-color',
-        'active-region-start-color',
-        'comment-begin',
-        'emacs-mode-string',
-        'isearch-terminators',
-        'vi-cmd-mode-string',
-        'vi-ins-mode-string',
-      ])),
+      choice(
+        /active-region-end-color/i,
+        /active-region-start-color/i,
+        /comment-begin/i,
+        /emacs-mode-string/i,
+        /isearch-terminators/i,
+        /vi-cmd-mode-string/i,
+        /vi-ins-mode-string/i,
+      ),
     number_variable: ($) =>
-      choice(...caseInsensitive([
-        'completion-display-width',
-        'completion-prefix-display-length',
-        'completion-query-items',
-        'history-size',
-        'keyseq-timeout',
-      ])),
-    edit_mode_variable: ($) => choice(...caseInsensitive(['editing-mode'])),
-    keymap_variable: ($) => choice(...caseInsensitive(['keymap'])),
+      choice(
+        /completion-display-width/i,
+        /completion-prefix-display-length/i,
+        /completion-query-items/i,
+        /history-size/i,
+        /keyseq-timeout/i,
+      ),
+    edit_mode_variable: ($) => /editing\-mode/i,
+    keymap_variable: ($) => /keymap/i,
 
     key_binding: ($) =>
       seq(
@@ -328,20 +312,18 @@ module.exports = grammar({
 
     symbolic_character_name: ($) =>
       choice(
-        ...caseInsensitive([
-          'Control',
-          'Meta',
-          'Del',
-          'Esc',
-          'Escape',
-          'LFD',
-          'Newline',
-          'Ret',
-          'Return',
-          'Rubout',
-          'Space',
-          'Spc',
-        ]),
+        /Control/i,
+        /Meta/i,
+        /Del/i,
+        /Esc/i,
+        /Escape/i,
+        /LFD/i,
+        /Newline/i,
+        /Ret/i,
+        /Return/i,
+        /Rubout/i,
+        /Space/i,
+        /Spc/i,
       ),
 
     key_literal: ($) => /\S/,

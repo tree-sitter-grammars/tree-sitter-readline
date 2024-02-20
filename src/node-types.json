@@ -36,11 +36,6 @@
     "fields": {}
   },
   {
-    "type": "bell_variable",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "bool_value",
     "named": true,
     "fields": {}
@@ -115,11 +110,6 @@
     "fields": {}
   },
   {
-    "type": "edit_mode_variable",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "include_directive",
     "named": true,
     "fields": {},
@@ -160,11 +150,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "keymap_variable",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "keyname",
@@ -461,6 +446,14 @@
     "named": true
   },
   {
+    "type": "bell_variable",
+    "named": true
+  },
+  {
+    "type": "edit_mode_variable",
+    "named": true
+  },
+  {
     "type": "escape_sequence",
     "named": true
   },
@@ -478,6 +471,10 @@
   },
   {
     "type": "keymap_value",
+    "named": true
+  },
+  {
+    "type": "keymap_variable",
     "named": true
   },
   {
