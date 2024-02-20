@@ -73,15 +73,12 @@ module.exports = grammar({
       ),
 
     _version_test: ($) =>
-      prec(
-        9,
-        seq(
-          alias(/version/i, 'version'),
-          repeat1(WHITE_SPACE),
-          choice('=', '==', '>=', '<=', '!=', '>', '<'),
-          repeat1(WHITE_SPACE),
-          alias(/\d+\.?\d*/, $.version_number),
-        ),
+      seq(
+        alias(/version/i, 'version'),
+        repeat1(WHITE_SPACE),
+        choice('=', '==', '>=', '<=', '!=', '>', '<'),
+        repeat1(WHITE_SPACE),
+        alias(/\d+\.?\d*/, $.version_number),
       ),
 
     _application_test: ($) => alias(token(prec(-1, /\S+/)), $.application_name),
