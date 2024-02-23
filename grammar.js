@@ -2,6 +2,8 @@ const NEWLINE = /\r?\n/;
 const WHITE_SPACE = /[ \t\f\v]/;
 const ANYTHING = /[^\r\n]+/;
 const ANYTHING_STARTING_NON_WHITESPACE = /\S[^\r\n]*/;
+const ERROR_ALIAS = ($) =>
+  alias(token(prec(-1, ANYTHING_STARTING_NON_WHITESPACE)), $.ERROR);
 
 module.exports = grammar({
   name: 'readline',
@@ -212,13 +214,16 @@ module.exports = grammar({
         ),
       ),
 
-    bool_value: ($) => choice('1', /on/i, /off/i),
-    bell_value: ($) => choice(/none/i, /visible/i, /audible/i),
+    bool_value: ($) => choice('1', /on/i, /off/i, ERROR_ALIAS($)),
+    bell_value: ($) => choice(/none/i, /visible/i, /audible/i, ERROR_ALIAS($)),
     string_value: ($) => ANYTHING_STARTING_NON_WHITESPACE,
-    number_value: ($) => /[-+]?\d+/,
-    edit_mode_value: ($) => choice(/emacs/i, /vi/i),
+    number_value: ($) => choice(/[-+]?\d+/, ERROR_ALIAS($)),
+    edit_mode_value: ($) => choice(/emacs/i, /vi/i, ERROR_ALIAS($)),
     keymap_value: ($) =>
-      /(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)/i,
+      choice(
+        /(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)/i,
+        ERROR_ALIAS($),
+      ),
 
     bool_variable: ($) =>
       choice(

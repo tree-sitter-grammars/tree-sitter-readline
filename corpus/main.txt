@@ -455,3 +455,51 @@ $enDIF
       (variable_setting
         (number_variable)
         (number_value)))))
+
+================================================================================
+fail fast
+================================================================================
+
+set editing-mode ema
+set input-meta on
+$If bell-style == visib
+    $if Bash
+        set keyseq-timeout 69
+    $else
+        set keyseq-timeout 129
+    $endif
+$ELSE
+    set KEYSEQ-TIMEOUT 56
+$enDIF
+
+--------------------------------------------------------------------------------
+
+(source
+  (variable_setting
+    (edit_mode_variable)
+    (edit_mode_value
+      (ERROR)))
+  (variable_setting
+    (bool_variable)
+    (bool_value))
+  (conditional_construct
+    (test
+      (bell_variable)
+      (bell_value
+        (ERROR)))
+    (consequence
+      (conditional_construct
+        (test
+          (application_name))
+        (consequence
+          (variable_setting
+            (number_variable)
+            (number_value)))
+        (alternative
+          (variable_setting
+            (number_variable)
+            (number_value)))))
+    (alternative
+      (variable_setting
+        (number_variable)
+        (number_value)))))

@@ -1088,6 +1088,22 @@
           "type": "PATTERN",
           "value": "off",
           "flags": "i"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": -1,
+              "content": {
+                "type": "PATTERN",
+                "value": "\\S[^\\r\\n]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "ERROR"
         }
       ]
     },
@@ -1108,6 +1124,22 @@
           "type": "PATTERN",
           "value": "audible",
           "flags": "i"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": -1,
+              "content": {
+                "type": "PATTERN",
+                "value": "\\S[^\\r\\n]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "ERROR"
         }
       ]
     },
@@ -1116,8 +1148,29 @@
       "value": "\\S[^\\r\\n]*"
     },
     "number_value": {
-      "type": "PATTERN",
-      "value": "[-+]?\\d+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[-+]?\\d+"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": -1,
+              "content": {
+                "type": "PATTERN",
+                "value": "\\S[^\\r\\n]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "ERROR"
+        }
+      ]
     },
     "edit_mode_value": {
       "type": "CHOICE",
@@ -1131,13 +1184,50 @@
           "type": "PATTERN",
           "value": "vi",
           "flags": "i"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": -1,
+              "content": {
+                "type": "PATTERN",
+                "value": "\\S[^\\r\\n]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "ERROR"
         }
       ]
     },
     "keymap_value": {
-      "type": "PATTERN",
-      "value": "(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)",
-      "flags": "i"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "(emacs(-standard|-meta|-ctlx)?|vi(-move|-command|-insert)?)",
+          "flags": "i"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": -1,
+              "content": {
+                "type": "PATTERN",
+                "value": "\\S[^\\r\\n]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "ERROR"
+        }
+      ]
     },
     "bool_variable": {
       "type": "CHOICE",
