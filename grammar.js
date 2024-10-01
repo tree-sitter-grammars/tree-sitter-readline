@@ -9,7 +9,7 @@ module.exports = grammar({
   name: 'readline',
 
   // Control whitespace explicitly
-  extras: ($) => [],
+  extras: (_) => [],
 
   rules: {
     source: ($) => repeat($._statement),
@@ -29,14 +29,12 @@ module.exports = grammar({
         seq(repeat(WHITE_SPACE), NEWLINE),
       ),
 
-    comment: ($) => seq(/#/, optional(ANYTHING)),
+    comment: (_) => seq(/#/, optional(ANYTHING)),
 
     conditional_construct: ($) =>
       seq(
         alias(/\$if/i, '$if'),
-        repeat1(WHITE_SPACE),
         $.test,
-        repeat(WHITE_SPACE),
         NEWLINE,
         alias(repeat($._statement), $.consequence),
         optional(seq(
@@ -46,18 +44,27 @@ module.exports = grammar({
           NEWLINE,
           alias(repeat($._statement), $.alternative),
         )),
+        $._endif,
+      ),
+
+    _endif: (_) =>
+      seq(
         repeat(WHITE_SPACE),
         alias(/\$endif/i, '$endif'),
         repeat(WHITE_SPACE),
       ),
 
     test: ($) =>
-      choice(
-        $._mode_test,
-        $._term_test,
-        $._version_test,
-        $._application_test,
-        $._variable_test,
+      seq(
+        repeat1(WHITE_SPACE),
+        choice(
+          $._mode_test,
+          $._term_test,
+          $._version_test,
+          $._application_test,
+          $._variable_test,
+        ),
+        repeat(WHITE_SPACE),
       ),
 
     _mode_test: ($) =>
@@ -216,7 +223,7 @@ module.exports = grammar({
 
     bool_value: ($) => choice('1', /on/i, /off/i, ERROR_ALIAS($)),
     bell_value: ($) => choice(/none/i, /visible/i, /audible/i, ERROR_ALIAS($)),
-    string_value: ($) => ANYTHING_STARTING_NON_WHITESPACE,
+    string_value: (_) => ANYTHING_STARTING_NON_WHITESPACE,
     number_value: ($) => choice(/[-+]?\d+/, ERROR_ALIAS($)),
     edit_mode_value: ($) => choice(/emacs/i, /vi/i, ERROR_ALIAS($)),
     keymap_value: ($) =>
@@ -225,7 +232,7 @@ module.exports = grammar({
         ERROR_ALIAS($),
       ),
 
-    bool_variable: ($) =>
+    bool_variable: (_) =>
       choice(
         /bind-tty-special-chars/i,
         /blink-matching-paren/i,
@@ -260,8 +267,8 @@ module.exports = grammar({
         /skip-completed-text/i,
         /visible-stats/i,
       ),
-    bell_variable: ($) => /bell\-style/i,
-    string_variable: ($) =>
+    bell_variable: (_) => /bell\-style/i,
+    string_variable: (_) =>
       choice(
         /active-region-end-color/i,
         /active-region-start-color/i,
@@ -271,7 +278,7 @@ module.exports = grammar({
         /vi-cmd-mode-string/i,
         /vi-ins-mode-string/i,
       ),
-    number_variable: ($) =>
+    number_variable: (_) =>
       choice(
         /completion-display-width/i,
         /completion-prefix-display-length/i,
@@ -279,8 +286,8 @@ module.exports = grammar({
         /history-size/i,
         /keyseq-timeout/i,
       ),
-    edit_mode_variable: ($) => /editing\-mode/i,
-    keymap_variable: ($) => /keymap/i,
+    edit_mode_variable: (_) => /editing\-mode/i,
+    keymap_variable: (_) => /keymap/i,
 
     key_binding: ($) =>
       seq(
@@ -291,7 +298,7 @@ module.exports = grammar({
       ),
 
     // users can define custom function names
-    function_name: ($) => /[a-zA-Z\-]+/,
+    function_name: (_) => /[a-zA-Z\-]+/,
 
     keyseq: ($) => $._double_quoted_string,
 
@@ -303,7 +310,7 @@ module.exports = grammar({
     _quoted_string: ($) =>
       seq(/["']/, repeat1(choice(/[^"'\\]/, $.escape_sequence)), /["']/),
 
-    escape_sequence: ($) =>
+    escape_sequence: (_) =>
       /\\([abdefnrtv'"\\]|x[0-9a-fA-F]{1,2}|[0-7]{1,3}|[CM]-)/,
 
     keyname: ($) =>
@@ -312,7 +319,7 @@ module.exports = grammar({
         choice($.symbolic_character_name, $.key_literal),
       ),
 
-    symbolic_character_name: ($) =>
+    symbolic_character_name: (_) =>
       choice(
         /Control/i,
         /Meta/i,
@@ -328,6 +335,6 @@ module.exports = grammar({
         /Spc/i,
       ),
 
-    key_literal: ($) => /\S/,
+    key_literal: (_) => /\S/,
   },
 });

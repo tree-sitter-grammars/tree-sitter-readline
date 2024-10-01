@@ -178,22 +178,8 @@
           "value": "$if"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t\\f\\v]"
-          }
-        },
-        {
           "type": "SYMBOL",
           "name": "test"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t\\f\\v]"
-          }
         },
         {
           "type": "PATTERN",
@@ -265,6 +251,15 @@
           ]
         },
         {
+          "type": "SYMBOL",
+          "name": "_endif"
+        }
+      ]
+    },
+    "_endif": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "REPEAT",
           "content": {
             "type": "PATTERN",
@@ -291,27 +286,46 @@
       ]
     },
     "test": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_mode_test"
+          "type": "REPEAT1",
+          "content": {
+            "type": "PATTERN",
+            "value": "[ \\t\\f\\v]"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "_term_test"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_mode_test"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_term_test"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_version_test"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_application_test"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_variable_test"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_version_test"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_application_test"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_variable_test"
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[ \\t\\f\\v]"
+          }
         }
       ]
     },
