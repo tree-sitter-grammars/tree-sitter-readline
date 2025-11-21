@@ -1318,6 +1318,11 @@
         },
         {
           "type": "PATTERN",
+          "value": "force-meta-prefix",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
           "value": "history-preserve-point",
           "flags": "i"
         },
@@ -1379,6 +1384,11 @@
         {
           "type": "PATTERN",
           "value": "revert-all-at-newline",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "search-ignore-case",
           "flags": "i"
         },
         {
