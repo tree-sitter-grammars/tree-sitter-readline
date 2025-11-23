@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "readline",
+      "camelcase": "Readline",
+      "title": "GNU Readline",
+      "scope": "source.readline",
+      "file-types": [
+        "inputrc"
+      ],
+      "injection-regex": "^readline$",
+      "class-name": "TreeSitterReadline"
+    }
+  ],
+  "metadata": {
+    "version": "1.1.1",
+    "license": "MIT",
+    "description": "A Tree-sitter parser for GNU Readline",
+    "authors": [
+      {
+        "name": "Riley Bruins"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter-grammars/tree-sitter-readline"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

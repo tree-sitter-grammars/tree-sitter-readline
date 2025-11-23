@@ -1,29 +1,29 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=62.4.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-readline"
-description = "Readline grammar for tree-sitter"
-version = "0.0.1"
+description = "A Tree-sitter parser for GNU Readline"
+version = "1.1.1"
 keywords = ["incremental", "parsing", "tree-sitter", "readline"]
 classifiers = [
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Topic :: Software Development :: Compilers",
   "Topic :: Text Processing :: Linguistic",
-  "Typing :: Typed"
+  "Typing :: Typed",
 ]
-requires-python = ">=3.8"
+authors = [{ name = "Riley Bruins" }]
+requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://github.com/tree-sitter/tree-sitter-readline"
+Homepage = "https://github.com/tree-sitter-grammars/tree-sitter-readline"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.21"]
+core = ["tree-sitter~=0.24"]
 
 [tool.cibuildwheel]
-build = "cp38-*"
+build = "cp310-*"
 build-frontend = "build"
